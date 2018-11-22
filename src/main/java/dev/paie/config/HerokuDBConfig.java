@@ -11,22 +11,22 @@ import java.net.URISyntaxException;
 @Configuration
 public class HerokuDBConfig {
 
-    @Bean
-    public DataSource dataSource() throws URISyntaxException {
+	@Bean
+	public DataSource dataSource() throws URISyntaxException {
 
-        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+		URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
-        String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
+		String username = dbUri.getUserInfo().split(":")[0];
+		String password = dbUri.getUserInfo().split(":")[1];
+		String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath()
+				+ "?sslmode=require";
 
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setUrl(dbUrl);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
 
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl(dbUrl);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-
-        return dataSource;
-    }
+		return dataSource;
+	}
 
 }
