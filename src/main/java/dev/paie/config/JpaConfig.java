@@ -16,7 +16,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@Import(DataSourcepostgreSQLConfig.class)
+//@Import(DataSourcepostgreSQLConfig.class)
+@Import(HerokuDBConfig.class)
 public class JpaConfig {
 
 	@Bean
